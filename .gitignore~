@@ -10,7 +10,10 @@ UnityTraining/
 [Tt]emp/
 [Oo]bj/
 sysinfo.txtTemp/
-Library/
+Library/cache/*
+Library/metadata/*
+Library/previews/*
+Library/ScriptAssemblies/*
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
