@@ -1,1 +1,1 @@
-Whalefall Team git reposiory for Unity Training and REACT project 
+Whalefall Team git reposiory for Unity REACT project 
