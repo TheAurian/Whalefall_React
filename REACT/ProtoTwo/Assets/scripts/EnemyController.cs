@@ -6,15 +6,16 @@ public class EnemyController : ActorController
 
     public Transform spawnLocation;
     public float attackRate;
+    public float turnSpeed;
+
 
     Vector3 currentDirection;
-    public Transform player;
+    Transform player;
     Vector3 movement; //Vector to store direction of player's movement
     NavMeshAgent navMeshAgent;
     public float speed; //speed that player will move at
-    float turnSpeed;
     float attackTimer;
-    public float attackRange = 10; //range that enemy can attack in
+    public float attackRange = 5; //range that enemy can attack in
     float hoverDist; //distance that enemy will hover before attacking 
 
 
@@ -28,22 +29,23 @@ public class EnemyController : ActorController
 
 
         //speed = 6f;
-        turnSpeed = 20f;
+        //turnSpeed = 20f;
         bIsDead = false;
         attackTimer = 0;
         currentHealth = initialHealth;
+        attackRange = Random.Range(5, 15);
 
         //position data
-        transform.position = spawnLocation.position;
+        //transform.position = spawnLocation.position;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
 
         //nav data
-        navMeshAgent.stoppingDistance = 5;
+        navMeshAgent.stoppingDistance = attackRange;
     }
 
 	// Use this for initialization
 	void Start () {
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
 
 	}
 	
@@ -55,9 +57,12 @@ public class EnemyController : ActorController
 
         if(distToPlayer > attackRange){
             Debug.Log("Not in range");
+            anim.SetBool("bIsWalking", true);
             this.Move();
         }else{
             Debug.Log("PLAYER IS IN RANGE TO BE ATTACKED");
+            anim.SetBool("bIsWalking", false);
+
         }
 
 	}
