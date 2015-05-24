@@ -10,10 +10,12 @@ public class EnemyController : ActorController
     Vector3 currentDirection;
     public Transform player;
     Vector3 movement; //Vector to store direction of player's movement
-    NavMeshAgent navMesh;
+    NavMeshAgent navMeshAgent;
     public float speed; //speed that player will move at
     float turnSpeed;
     float attackTimer;
+    public float attackRange = 10; //range that enemy can attack in
+    float hoverDist; //distance that enemy will hover before attacking 
 
 
     void Awake()
@@ -21,13 +23,22 @@ public class EnemyController : ActorController
         //get player character components
         thisRigidBody = GetComponent<Rigidbody>();
         collider = GetComponent<CapsuleCollider>();
+        anim = GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+
         //speed = 6f;
         turnSpeed = 20f;
         bIsDead = false;
-        anim = GetComponent<Animator>();
         attackTimer = 0;
         currentHealth = initialHealth;
-        navMesh = GetComponent<NavMeshAgent>();
+
+        //position data
+        transform.position = spawnLocation.position;
+
+
+        //nav data
+        navMeshAgent.stoppingDistance = 5;
     }
 
 	// Use this for initialization
@@ -38,7 +49,17 @@ public class EnemyController : ActorController
 	
 	// Update is called once per frame
 	void Update () {
-        this.Move();
+
+
+        float distToPlayer = Vector3.Distance(player.position, this.transform.position);
+
+        if(distToPlayer > attackRange){
+            Debug.Log("Not in range");
+            this.Move();
+        }else{
+            Debug.Log("PLAYER IS IN RANGE TO BE ATTACKED");
+        }
+
 	}
 
     void FixedUpdate()
@@ -49,7 +70,8 @@ public class EnemyController : ActorController
 
     void Move(){
         //transform.position = Vector3.Lerp(transform.position, )
-        navMesh.SetDestination(player.position);
+        navMeshAgent.SetDestination(player.position);
+
     }
 
     void Turn()
