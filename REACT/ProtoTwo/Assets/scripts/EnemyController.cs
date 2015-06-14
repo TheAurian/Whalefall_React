@@ -56,11 +56,11 @@ public class EnemyController : ActorController
         float distToPlayer = Vector3.Distance(player.position, this.transform.position);
 
         if(distToPlayer > attackRange){
-            Debug.Log("Not in range");
+            //Debug.Log("Not in range");
             anim.SetBool("bIsWalking", true);
             this.Move();
         }else{
-            Debug.Log("PLAYER IS IN RANGE TO BE ATTACKED");
+            //Debug.Log("PLAYER IS IN RANGE TO BE ATTACKED");
             anim.SetBool("bIsWalking", false);
 
         }

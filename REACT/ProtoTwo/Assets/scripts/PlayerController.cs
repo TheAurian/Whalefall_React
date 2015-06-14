@@ -12,18 +12,30 @@ public class PlayerController : ActorController {
     float turnSpeed;
     float attackTimer;
     InputController input;
+    CapsuleCollider weapon;
+    GameObject spear;
+    int killableMask;
 
+    public int damagePerShot = 20;                  // The damage inflicted by each bullet.
+    public float timeBetweenBullets = 0.15f;        // The time between each shot.
+    public float range = 100f;                      // The distance the gun can fire.
+
+    float timer;
 
     void Awake()
     {
         //get player character components
         thisRigidBody = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        input = GetComponent<InputController>();
+        spear = GameObject.FindGameObjectWithTag("Weapon");
+        weapon = spear.GetComponent<CapsuleCollider>();
+
         //speed = 6f;
         turnSpeed = 20f;
         bIsDead = false;
-        anim = GetComponent<Animator>();
         attackTimer = 0;
-        input = GetComponent<InputController>();
+        killableMask = LayerMask.GetMask("Killable");
     }
 
     void Start()
@@ -34,7 +46,7 @@ public class PlayerController : ActorController {
 
     void Update()
     {
-
+        timer += Time.deltaTime;
     }
 
 
@@ -67,11 +79,7 @@ public class PlayerController : ActorController {
             Debug.Log("Toroa sweeping right!");
             anim.SetTrigger("tSweepRight");
             attackTimer = 0;
-            EnemyController enemyHealth = collider.GetComponent<EnemyController>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(20);
-            }
+            
         }
         else if (input.GetStab() && attackTimer >= attackRate)
         {
