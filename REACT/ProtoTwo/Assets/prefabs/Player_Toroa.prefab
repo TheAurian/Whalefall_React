@@ -615,6 +615,7 @@ GameObject:
   - 81: {fileID: 8136862}
   - 114: {fileID: 11421724}
   - 114: {fileID: 11452110}
+  - 114: {fileID: 11416362}
   m_Layer: 0
   m_Name: Player_Toroa
   m_TagString: Player
@@ -798,9 +799,10 @@ GameObject:
   - 33: {fileID: 3342176}
   - 136: {fileID: 13661190}
   - 23: {fileID: 2397356}
+  - 114: {fileID: 11410340}
   m_Layer: 0
   m_Name: Weapon_Spear
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1759,6 +1761,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11410340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2784385ecdb4434dbd3a02b62657c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11416362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11421724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1809,7 +1833,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188892}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: .5
   m_Height: 2

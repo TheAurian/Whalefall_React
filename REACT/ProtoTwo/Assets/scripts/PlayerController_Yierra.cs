@@ -19,7 +19,6 @@ public class PlayerController_Yierra : ActorController {
 
     //player_toroa data
     GameObject player;
-    Transform player_Transform;
 
     public int damagePerShot = 20;                  // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
@@ -43,7 +42,6 @@ public class PlayerController_Yierra : ActorController {
 
         //get player data
         player = GameObject.FindGameObjectWithTag("Player");
-        player_Transform = player.transform;
 
         //get navmesh data
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -62,19 +60,22 @@ public class PlayerController_Yierra : ActorController {
 	void Update () {
         timer += Time.deltaTime;
 
-        float distToPlayer = Vector3.Distance(player_Transform.position, this.transform.position);
+        float distToPlayer = Vector3.Distance(player.transform.position, this.transform.position);
 
-        if (distToPlayer > circumRangeToToroa)
-        {
-            Debug.Log("Not in range ===============     " + distToPlayer);
-            //anim.SetBool("bIsWalking", true);
-            this.Move();
-        }else
-        {
-            navMeshAgent.Stop();
-            Debug.Log("YIERRA IS IN POSITION");
-            //anim.SetBool("bIsWalking", false);
-        }
+        //if (distToPlayer > circumRangeToToroa)
+        //{
+        //    Debug.Log("Not in range ===============     " + distToPlayer);
+        //    //anim.SetBool("bIsWalking", true);
+        //    this.Move();
+        //}else
+        //{
+        //    //navMeshAgent.Stop();
+        //    Debug.Log("YIERRA IS IN POSITION");
+        //    //anim.SetBool("bIsWalking", false);
+        //}
+
+        this.Move();
+
 	}
 
     void FixedUpdate()
@@ -113,7 +114,9 @@ public class PlayerController_Yierra : ActorController {
             navMeshAgent.Resume();
         }
 
-        navMeshAgent.SetDestination(player_Transform.position);
+        Vector3 navPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z - circumRangeToToroa ); 
+
+        navMeshAgent.SetDestination(navPos);
 
     }
 

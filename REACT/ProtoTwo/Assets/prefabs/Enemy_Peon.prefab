@@ -974,7 +974,7 @@ GameObject:
   - 114: {fileID: 11462126}
   - 95: {fileID: 9588468}
   m_Layer: 8
-  m_Name: monster1AnimsNormal
+  m_Name: Enemy_Peon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
